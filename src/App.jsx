@@ -3,11 +3,11 @@ import "./App.css";
 
 function Task(props) {
   return (
-    <li className={props.competed ? "completed" : ""}>
+    <li className={props.completed ? "completed" : ""}>
       {props.name}
       <div className="task-buttons">
         <button className="complete-btn" onClick={props.onComplete}>
-          {props.competed ? "undo" : "compete"}
+          {props.completed ? "undo" : "completed"}
         </button>
         <button className="delete-btn" onClick={props.onDelete}>
           delete
@@ -25,7 +25,7 @@ function App() {
       const newTaskObject = {
         id: Date.now(),
         name: newTask,
-        competed: false,
+        completed: false,
       };
       setTasks([...tasks, newTaskObject]);
       setNewTask("");
@@ -35,7 +35,7 @@ function App() {
   const completeTask = (id) => {
     setTasks(
       tasks.map((task) =>
-        task.id === id ? { ...task, competed: !task.competed } : task
+        task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
   };
@@ -58,7 +58,7 @@ function App() {
           <Task
             key={task.id}
             name={task.name}
-            completed={task.competed}
+            completed={task.completed}
             onComplete={() => completeTask(task.id)} // Fixed here
             onDelete={() => deleteTask(task.id)}
           />
